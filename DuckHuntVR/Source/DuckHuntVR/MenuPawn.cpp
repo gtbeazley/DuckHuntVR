@@ -5,6 +5,7 @@
 #include "Camera/CameraComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "ConstructorHelpers.h"
 #include "Engine/World.h"
 #include "QuitButton.h"
 #include "Button3D.h"
@@ -32,26 +33,34 @@ void AMenuPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	TArray<FHitResult> l_outHits;
+	FHitResult outHit;
 	FVector l_traceStartLoc = Camera->GetComponentLocation(), l_traceEndLoc = l_traceStartLoc + (Camera->GetForwardVector() * 3000);
 
-	GetWorld()->LineTraceMultiByChannel(l_outHits, l_traceStartLoc, l_traceEndLoc, ECC_Visibility);
+	TArray<AActor*> l_actors;
 
-	for (auto hitResult : l_outHits)
+	GetWorld()->LineTraceSingleByChannel(outHit, l_traceStartLoc, l_traceEndLoc, ECC_Visibility);
+ 
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AQuitButton::StaticClass(), l_actors);
+	if (Cast<AQuitButton>(outHit.Actor))
 	{
+		Cast<AQuitButton>(outHit.Actor)->Highlighted = true;
 		if (shot)
-		{
-			if (Cast<AQuitButton>(hitResult.Actor))
-			{
-				UKismetSystemLibrary::QuitGame(this, GetWorld()->GetFirstPlayerController(), EQuitPreference::Quit);
-			}
-			else if (Cast<AButton3D>(hitResult.Actor))
-			{
-				Cast<ADuckHuntVRGameModeBase>(UGameplayStatics::GetGameMode(this))->OpenNextMap("MainGameMap");
-			}
-		}
-
+			UKismetSystemLibrary::QuitGame(this, GetWorld()->GetFirstPlayerController(), EQuitPreference::Quit);
 	}
+	else
+		if(l_actors.IsValidIndex(0) && l_actors[0] != nullptr &&  Cast<AQuitButton>(l_actors[0])) Cast<AQuitButton>(l_actors[0])->Highlighted = false;
+	 
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AButton3D::StaticClass(), l_actors);
+	 if (Cast<AButton3D>(outHit.Actor))
+	{
+		Cast<AButton3D>(outHit.Actor)->Highlighted = true;
+
+		if (shot)
+			Cast<ADuckHuntVRGameModeBase>(UGameplayStatics::GetGameMode(this))->OpenNextMap("MainGameMap");
+	}
+	else
+		 if (l_actors.IsValidIndex(0) &&  l_actors[0] != nullptr &&  Cast<AButton3D>(l_actors[0])) Cast<AButton3D>(l_actors[0])->Highlighted = false;
+	  
 	shot = false;
 }
 

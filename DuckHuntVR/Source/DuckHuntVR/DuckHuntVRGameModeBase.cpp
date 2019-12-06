@@ -13,6 +13,11 @@ ADuckHuntVRGameModeBase::ADuckHuntVRGameModeBase()
 	
 }
 
+void ADuckHuntVRGameModeBase::BeginPlay()
+{
+	Super::BeginPlay();
+}
+
 void ADuckHuntVRGameModeBase::OpenNextMap(FName a_name)
 {
 	if(a_name == "MainMenu")
