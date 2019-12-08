@@ -33,7 +33,8 @@ protected:
 	FVector StartLoc;
 
 	// the speed that the duck travels
-	float m_speed = 0.1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float m_speed = 10;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

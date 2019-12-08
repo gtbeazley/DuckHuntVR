@@ -7,6 +7,7 @@
 #include "PathBox.generated.h"
 
 class UBoxComponent; 
+class ADuck;
 
 UCLASS()
 class DUCKHUNTVR_API APathBox : public AActor
@@ -24,6 +25,8 @@ protected:
 	// Where the path nodes for the ducks will spawn
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UBoxComponent* NodeBox;
+
+	TArray<ADuck*> ducks;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

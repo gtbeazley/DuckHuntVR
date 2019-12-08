@@ -74,8 +74,11 @@ void AMenuPawn::Interact()
 void AMenuPawn::LookUp(float a_val)
 {
 	FRotator rotation = Camera->GetComponentRotation();
-	rotation.Pitch -= a_val;
-	Camera->SetWorldRotation(rotation);
+	if (rotation.Pitch - a_val >= -85 && rotation.Pitch - a_val <= 85)
+	{
+		rotation.Pitch -= a_val;
+		Camera->SetWorldRotation(rotation);
+	}
 }
 
 void AMenuPawn::LookRight(float a_val)

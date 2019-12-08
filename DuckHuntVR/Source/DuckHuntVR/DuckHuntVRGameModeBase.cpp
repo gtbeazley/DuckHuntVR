@@ -15,10 +15,25 @@ ADuckHuntVRGameModeBase::ADuckHuntVRGameModeBase()
 
 void ADuckHuntVRGameModeBase::OpenNextMap(FName a_name)
 {
-	if(a_name == "MainMenu")
+	if(a_name == MainMenuName)
 		DefaultPawnClass = AMenuPawn::StaticClass();
 	else
 		DefaultPawnClass = ADuckHunt_Shooter::StaticClass();
 
 	UGameplayStatics::OpenLevel(this, a_name);
+}
+
+FString ADuckHuntVRGameModeBase::GetSlotName()
+{
+	return SaveGameSlot;
+}
+
+FName ADuckHuntVRGameModeBase::GetMainMenuMapName()
+{
+	return MainMenuName;
+}
+
+FName ADuckHuntVRGameModeBase::GetMainGameMapName()
+{
+	return MainGameName;
 }

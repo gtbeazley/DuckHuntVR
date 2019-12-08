@@ -7,6 +7,8 @@
 #include "DuckHunt_Shooter.generated.h"
 
 class UCameraComponent;
+class UDuckHunt_SaveGame;
+class ADuckHuntVRGameModeBase;
 
 UCLASS()
 class DUCKHUNTVR_API ADuckHunt_Shooter : public APawn
@@ -25,6 +27,17 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	// determines if the player has shot
+	bool shot = false;
+
+	// The number of bullets the player is allowed to own
+	int32 m_maxBullets = 3;
+	
+	// The number of bullets the player currently owns
+	int32 m_curBullets;
+
+	// The current scor the player has acquired
+	int32 m_curScore = 0;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -48,5 +61,24 @@ public:
 	UFUNCTION()
 		void LookRight(float a_val);
 	
+	/* The functionality for losing the game, returning to main menu and comparing and setting highscores */
+	UFUNCTION(BlueprintCallable)
+		void LoseGame();
+
+	/* Saves the current score to the game slot */
+	UFUNCTION(BlueprintCallable)
+		void SaveGame(UDuckHunt_SaveGame * a_sGInstance, ADuckHuntVRGameModeBase* a_gMInstance);
+
+	// Accesses the current score
+	UFUNCTION(BlueprintCallable)
+	int32 GetCurScore();
+
+	// Accesses the maximum number of bullets that the player is allowed to own
+	UFUNCTION(BlueprintCallable)
+	int32 GetMaxBullets();
+
+	// Accesses the current number of bullets that the player owns
+	UFUNCTION(BlueprintCallable)
+	int32 GetCurBullets();
 	
 };

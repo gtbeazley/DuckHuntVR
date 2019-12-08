@@ -17,12 +17,29 @@ class DUCKHUNTVR_API ADuckHuntVRGameModeBase : public AGameModeBase
 		ADuckHuntVRGameModeBase();
 
 public:
-	/* handles the next map*/
-	void OpenNextMap(FName a_name);
 
 	// Name of the main menu map
 	FName MainMenuName = "MainMenu";
 
 	// Name of the main game map
 	FName MainGameName = "MainGameMap";
+
+	// Name of the save game slot
+	FString SaveGameSlot = "DuckHuntVRBG";
+	
+	/* handles the next map*/
+	UFUNCTION(BlueprintCallable)
+		void OpenNextMap(FName a_name);
+
+	// Gets the Savegameslot name
+	UFUNCTION(BlueprintCallable)
+		FString GetSlotName();
+
+	// Gets the main menu map name
+	UFUNCTION(BlueprintCallable)
+		FName GetMainMenuMapName();
+
+	// Gets main game map name
+	UFUNCTION(BlueprintCallable)
+		FName GetMainGameMapName();
 };

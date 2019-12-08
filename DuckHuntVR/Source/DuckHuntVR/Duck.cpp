@@ -17,7 +17,9 @@ ADuck::ADuck()
 
 	static ConstructorHelpers::FObjectFinder<UMaterialInterface> matObject(TEXT("Material'/Game/Materials/Red.Red'"));
 	Mesh->SetMaterial(0, matObject.Object);
-
+	
+	Mesh->SetSimulatePhysics(true);
+	Mesh->SetEnableGravity(false);
 }
 
 // Called when the game starts or when spawned
@@ -44,7 +46,7 @@ void ADuck::SetTarLoc(FVector a_tarLoc)
 
 bool ADuck::NeedsNewLoc()
 {
-	if ((TarLoc - GetActorLocation()).Size() <= 10)
+	if (!TarLocFound || (TarLoc - GetActorLocation()).Size() <= 10)
 	{
 		TarLocFound = false;
 		return true;
