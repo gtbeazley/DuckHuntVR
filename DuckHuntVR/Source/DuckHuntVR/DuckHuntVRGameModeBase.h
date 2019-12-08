@@ -17,9 +17,6 @@ class DUCKHUNTVR_API ADuckHuntVRGameModeBase : public AGameModeBase
 		ADuckHuntVRGameModeBase();
 
 public:
-	UFUNCTION(BlueprintCallable)
-		virtual void BeginPlay() override;
-
 	/* handles the next map*/
 	void OpenNextMap(FName a_name);
 };

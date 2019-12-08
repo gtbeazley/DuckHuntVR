@@ -24,7 +24,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
 		UCameraComponent* Camera;
-	  
+
 	bool shot = false;
 public:	
 	// Called every frame

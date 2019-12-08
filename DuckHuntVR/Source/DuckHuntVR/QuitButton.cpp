@@ -16,12 +16,8 @@ AQuitButton::AQuitButton()
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> meshObject(TEXT("StaticMesh'/Game/Assets/Cube_Asset.Cube_Asset'"));
 	Mesh->SetStaticMesh(meshObject.Object);
 
-	static ConstructorHelpers::FObjectFinder<UMaterialInterface> hlMatObject(TEXT("Material'/Game/Materials/Green.Green'"));
-	HLMat = hlMatObject.Object;
-
-	static ConstructorHelpers::FObjectFinder<UMaterialInterface> uhlMatObject(TEXT("Material'/Game/Materials/Black.Black'"));
-	UHLMat = uhlMatObject.Object;
-	Mesh->SetMaterial(0, UHLMat);
+	static ConstructorHelpers::FObjectFinder<UMaterialInterface> meshMat(TEXT("Material'/Game/Materials/Black.Black'"));
+	Mesh->SetMaterial(0, meshMat.Object);
 }
 
 // Called when the game starts or when spawned
@@ -31,20 +27,10 @@ void AQuitButton::BeginPlay()
 	
 }
 
-UStaticMeshComponent * AQuitButton::GetMesh()
-{
-	return Mesh;
-}
-
 // Called every frame
 void AQuitButton::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (Highlighted)
-		Mesh->SetMaterial(0, HLMat);
-	else
-		Mesh->SetMaterial(0, UHLMat);
-	 
 }
 
