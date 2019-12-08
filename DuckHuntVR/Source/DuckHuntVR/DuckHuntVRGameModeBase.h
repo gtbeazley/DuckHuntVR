@@ -19,4 +19,10 @@ class DUCKHUNTVR_API ADuckHuntVRGameModeBase : public AGameModeBase
 public:
 	/* handles the next map*/
 	void OpenNextMap(FName a_name);
+
+	// Name of the main menu map
+	FName MainMenuName = "MainMenu";
+
+	// Name of the main game map
+	FName MainGameName = "MainGameMap";
 };
