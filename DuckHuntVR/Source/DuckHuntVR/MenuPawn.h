@@ -8,6 +8,8 @@
 
 
 class UCameraComponent;
+class AQuitButton;
+class AButton3D;
 
 UCLASS()
 class DUCKHUNTVR_API AMenuPawn : public APawn
@@ -24,6 +26,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
 		UCameraComponent* Camera;
+
+	AQuitButton* quitbutton = nullptr;
+	AButton3D* startbutton = nullptr;
 
 	bool shot = false;
 public:	

@@ -19,6 +19,14 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	/* Material When the actor is unhighlighted */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Materials")
+		UMaterialInterface* UnhighlightedMaterial;
+
+	/* Material When the actor is highlighted */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Materials")
+		UMaterialInterface* HighlightedMaterial;
+
 	/* The static mesh of the button */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
 		UStaticMeshComponent* Mesh;
@@ -30,6 +38,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	
-	
+	/* This will only be affected by the player */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		bool isHighlighted = false;
+
+	bool wasHighlighted = false;
 };

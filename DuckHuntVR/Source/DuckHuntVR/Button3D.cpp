@@ -15,8 +15,13 @@ AButton3D::AButton3D()
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> meshObject(TEXT("StaticMesh'/Game/Assets/Cube_Asset.Cube_Asset'"));
 	Mesh->SetStaticMesh(meshObject.Object);
 
-	static ConstructorHelpers::FObjectFinder<UMaterialInterface> meshMat(TEXT("Material'/Game/Materials/Black.Black'"));
-	Mesh->SetMaterial(0, meshMat.Object);
+	static ConstructorHelpers::FObjectFinder<UMaterialInterface> UHLMat (TEXT("Material'/Game/Materials/Black.Black'"));
+	UnhighlightedMaterial = UHLMat.Object;
+	Mesh->SetMaterial(0, UnhighlightedMaterial);
+
+
+	static ConstructorHelpers::FObjectFinder<UMaterialInterface> HLMat(TEXT("Material'/Game/Materials/Green.Green'"));
+	HighlightedMaterial = HLMat.Object;
 }
 
 // Called when the game starts or when spawned
@@ -31,6 +36,12 @@ void AButton3D::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (!wasHighlighted && isHighlighted)
+		Mesh->SetMaterial(0, HighlightedMaterial);
+	else if(wasHighlighted && !isHighlighted)
+		Mesh->SetMaterial(0, UnhighlightedMaterial);
+
+	wasHighlighted = isHighlighted;
 }
 
 void AButton3D::SetText(FText a_text)

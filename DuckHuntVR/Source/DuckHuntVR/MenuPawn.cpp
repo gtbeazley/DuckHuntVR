@@ -32,6 +32,11 @@ void AMenuPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (startbutton && startbutton->isHighlighted)
+		startbutton->isHighlighted = false;
+	if (quitbutton && quitbutton->isHighlighted)
+		quitbutton->isHighlighted = false;
+
 	TArray<FHitResult> l_outHits;
 	FVector l_traceStartLoc = Camera->GetComponentLocation(), l_traceEndLoc = l_traceStartLoc + (Camera->GetForwardVector() * 3000);
 
@@ -48,6 +53,19 @@ void AMenuPawn::Tick(float DeltaTime)
 			else if (Cast<AButton3D>(hitResult.Actor))
 			{
 				Cast<ADuckHuntVRGameModeBase>(UGameplayStatics::GetGameMode(this))->OpenNextMap("MainGameMap");
+			}
+		}
+		else
+		{
+			if (Cast<AQuitButton>(hitResult.Actor))
+			{
+				quitbutton = Cast<AQuitButton>(hitResult.Actor);
+				quitbutton->isHighlighted = true;
+			}
+			else if (Cast<AButton3D>(hitResult.Actor))
+			{
+				startbutton = Cast<AButton3D>(hitResult.Actor);
+				startbutton->isHighlighted = true;
 			}
 		}
 
