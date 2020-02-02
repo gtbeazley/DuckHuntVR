@@ -14,6 +14,7 @@ class DUCKHUNTVR_API UDuckHunt_SaveGame : public USaveGame
 {
 	GENERATED_BODY()
 public:
+	//Defaults constructor of the save game
 	UDuckHunt_SaveGame();
 	
 	// Count of how many ducks were shot

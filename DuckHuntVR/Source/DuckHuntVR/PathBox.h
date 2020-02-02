@@ -26,6 +26,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UBoxComponent* NodeBox;
 
+	//array of ducks that look for a new location
 	TArray<ADuck*> ducks;
 public:	
 	// Called every frame

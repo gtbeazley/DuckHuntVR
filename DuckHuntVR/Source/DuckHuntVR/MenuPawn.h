@@ -24,12 +24,15 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	//camera component reference
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
 		UCameraComponent* Camera;
-
+	// quitbutton pointer used to change its colour for highlighting 
 	AQuitButton* quitbutton = nullptr;
+	//startbutton poiont used for chaing its colour for highlighting
 	AButton3D* startbutton = nullptr;
 
+	//if the menu player has shot
 	bool shot = false;
 public:	
 	// Called every frame

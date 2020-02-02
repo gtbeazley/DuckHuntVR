@@ -55,5 +55,6 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		bool isHighlighted = false;
 
+	//the previous state of being highlighted
 	bool wasHighlighted = false;
 };
