@@ -1,0 +1,41 @@
+Review of George-Thomas Beazleys Duck Hunt VR
+By: Martin Kocourek
+
+T) Aim (Move the mouse) at the quit button and shoot (Press the left mouse button)
+E) This should quit the game successfully
+O) Works mostly as expected, but aiming is offset.
+
+T) Do the same with the start game button
+E) This change the game map to the main game 
+O) Works as expected.
+
+T) Aim the cursor at the ducks(red balls) and shoot 
+E) No bullets(Displayed on the bottom left) should be lost, 
+the duck should respawn at their spawn point, and a point should be added to the players score(Displayed on the bottom right)
+O) Functions as expected.
+
+T) Miss the duck
+E) A bullet should be lost
+O) Works as expected.
+
+T) Miss three times
+E) This should take you back to the main menu screen and show a new highscore(If you set a new one)
+O) Functions as expected.
+
+T) Play the game as many times as needed to answer these questions
+
+Q) Were there any expectations in the tests that weren't meant?
+A) All tests are achievable with expected results.
+
+Q) Are there any issues with the game
+A) Aiming on the menu screen behaves somewhat strangely; I need to aim ~45 degrees downward, causing the Quit button to appear near the top of the screen, to have the Quit button highlighted.
+
+Q) What was your highest score
+A) 46.
+
+Q) Is there any other notes worth noting
+A) Targets respawning at their original positions instead of having random spawn points means that it's easy to spawn-camp them for very high scores.
+
+[After Feedback Notes]
+-After realising how easy it was to spawn kill, a fix was implemented to spawn the ducks at a different spot
+-After reading the response about the main menu, a solution has been used to solve the offset aim issue
