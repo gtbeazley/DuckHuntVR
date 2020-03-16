@@ -9,6 +9,7 @@
 #include "QuitButton.h"
 #include "Button3D.h"
 #include "DuckHuntVRGameModeBase.h"
+#include "DrawDebugHelpers.h"
 
 // Sets default values
 AMenuPawn::AMenuPawn()
@@ -41,6 +42,7 @@ void AMenuPawn::Tick(float DeltaTime)
 	FVector l_traceStartLoc = Camera->GetComponentLocation(), l_traceEndLoc = l_traceStartLoc + (Camera->GetForwardVector() * 3000);
 
 	GetWorld()->LineTraceMultiByChannel(l_outHits, l_traceStartLoc, l_traceEndLoc, ECC_Visibility);
+	DrawDebugLine(GetWorld(), l_traceStartLoc, l_traceEndLoc, FColor(0, 255, 0), true, 1, 1, 1);
 
 	for (auto hitResult : l_outHits)
 	{
@@ -50,7 +52,7 @@ void AMenuPawn::Tick(float DeltaTime)
 			{
 				UKismetSystemLibrary::QuitGame(this, GetWorld()->GetFirstPlayerController(), EQuitPreference::Quit);
 			}
-			else if (Cast<AButton3D>(hitResult.Actor))
+			if (Cast<AButton3D>(hitResult.Actor))
 			{
 				Cast<ADuckHuntVRGameModeBase>(UGameplayStatics::GetGameMode(this))->OpenNextMap("MainGameMap");
 			}
@@ -62,7 +64,7 @@ void AMenuPawn::Tick(float DeltaTime)
 				quitbutton = Cast<AQuitButton>(hitResult.Actor);
 				quitbutton->isHighlighted = true;
 			}
-			else if (Cast<AButton3D>(hitResult.Actor))
+			if (Cast<AButton3D>(hitResult.Actor))
 			{
 				startbutton = Cast<AButton3D>(hitResult.Actor);
 				startbutton->isHighlighted = true;
