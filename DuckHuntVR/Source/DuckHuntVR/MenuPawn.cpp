@@ -2,6 +2,7 @@
 
 #include "MenuPawn.h"
 #include "Components/InputComponent.h" 
+#include "Components/StaticMeshComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
@@ -59,20 +60,24 @@ void AMenuPawn::Tick(float DeltaTime)
 		}
 		else
 		{
-			if (Cast<AQuitButton>(hitResult.Actor))
-			{
-				quitbutton = Cast<AQuitButton>(hitResult.Actor);
-				quitbutton->isHighlighted = true;
-			}
-			if (Cast<AButton3D>(hitResult.Actor))
-			{
-				startbutton = Cast<AButton3D>(hitResult.Actor);
-				startbutton->isHighlighted = true;
-			}
+			UE_LOG(LogTemp, Warning, TEXT(hitResult.Component->ComponentTags[0]));
+			//if (hitResult.Component->ComponentHasTag(FName("Button"))) {
+				if (Cast<AQuitButton>(hitResult.Actor))
+				{
+					quitbutton = Cast<AQuitButton>(hitResult.Actor);
+						quitbutton->isHighlighted = true;
+				}
+				if (Cast<AButton3D>(hitResult.Actor))
+				{
+					startbutton = Cast<AButton3D>(hitResult.Actor);
+						startbutton->isHighlighted = true;
+				}
+			//}
 		}
 
 	}
 	shot = false;
+	l_outHits.Empty();
 }
 
 // Called to bind functionality to input

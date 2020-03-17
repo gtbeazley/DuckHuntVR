@@ -37,5 +37,4 @@ Q) Is there any other notes worth noting
 A) Targets respawning at their original positions instead of having random spawn points means that it's easy to spawn-camp them for very high scores.
 
 [After Feedback Notes]
--After realising how easy it was to spawn kill, a fix was implemented to spawn the ducks at a different spot
--After reading the response about the main menu, a solution has been used to solve the offset aim issue
+-After realising how easy it was to spawn kill, a fix was implemented to spawn the ducks at a random location

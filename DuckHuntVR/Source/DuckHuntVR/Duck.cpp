@@ -3,6 +3,8 @@
 #include "Duck.h"
 #include "Components/StaticMeshComponent.h"
 #include "Materials/MaterialInterface.h"
+#include "Kismet/KismetMathLibrary.h"
+#include <time.h>
 #include "ConstructorHelpers.h"
 
 // Sets default values
@@ -14,10 +16,10 @@ ADuck::ADuck()
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> meshObject(TEXT("StaticMesh'/Game/Assets/Sphere_Asset.Sphere_Asset'"));
 	Mesh->SetStaticMesh(meshObject.Object);
-
+	
 	static ConstructorHelpers::FObjectFinder<UMaterialInterface> matObject(TEXT("Material'/Game/Materials/Red.Red'"));
 	Mesh->SetMaterial(0, matObject.Object);
-	
+	srand(time(NULL));
 	Mesh->SetSimulatePhysics(true);
 	Mesh->SetEnableGravity(false);
 }
@@ -67,6 +69,6 @@ void ADuck::MoveToTarget()
 
 void ADuck::ResetPos()
 {
-	SetActorLocation(StartLoc);
+	SetActorLocation({(float)(rand() %1000),(float)(rand() % 1000),(float)(rand() % 1000) });
 }
 
